@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     // .findOne() Method is same as the SQL Query: SELECT * FROM users WHERE id = 1;
     User.findOne({
+      attributes: { exclude: ['password'] },
         where: {
           id: req.params.id
         }
