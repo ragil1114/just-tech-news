@@ -3,7 +3,7 @@ const { User } = require('../../models');
 
 // GET /api/users
 router.get('/', (req, res) => {
-  // Access our User model and run .findAll() method
+  // Access our User model and run .findAll() Method. This method is equivalent to the SQL Query: SELECT * FROM users;
   User.findAll()
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
