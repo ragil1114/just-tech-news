@@ -64,11 +64,16 @@ router.post('/login', (req, res) => {
       res.status(400).json({ message: 'No user with that email address!' });
       return;
     }
-    
-    //res.json({ user: dbUserData });
 
     // Verify user thru variable that holds boolean value from .checkPassword() function in User.js file
     const validPassword = dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect password!' });
+      return;
+    }
+    
+    res.json({ user: dbUserData, message: 'You are now logged in!' });
   });  
 });
 
