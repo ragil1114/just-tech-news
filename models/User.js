@@ -48,10 +48,9 @@ User.init(
   {
     hooks: {
       // set up beforeCreate lifecycle "hook" functionality. A bcrypt hash function nested inside an Async hooks function thats embedded inside the hooks object property.
-      beforeCreate(userData) {
-        return bcrypt.hash(userData.password, 10).then(newUserData => {
-          return newUserData
-        });
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
       }
     },
     // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
