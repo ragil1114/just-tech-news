@@ -51,6 +51,12 @@ router.post('/', (req, res) => {
         });
 });
 
+router.post('/login', (req, res) => {
+
+  // Query operation
+
+});
+
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
     // aka Query Operation. If req.body has exact key/value pairs to match the model, you can just use `req.body` instead. Pass in req.body instead to only update what's passed through.
