@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// POST /api/users
+// POST Route to create new user. /api/users
 router.post('/', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
