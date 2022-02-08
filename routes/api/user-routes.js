@@ -67,7 +67,7 @@ router.post('/login', (req, res) => {
     
     //res.json({ user: dbUserData });
 
-    // Verify user
+    // Verify user thru variable that holds boolean value from .checkPassword() function in User.js file
     const validPassword = dbUserData.checkPassword(req.body.password);
   });  
 });
