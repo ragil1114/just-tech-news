@@ -47,7 +47,7 @@ User.init(
     },
   {
     hooks: {
-      // set up beforeCreate lifecycle "hook" functionality
+      // set up beforeCreate lifecycle "hook" functionality. Async hooks function inside the hooks object property.
       beforeCreate(userData) {
         return bcrypt.hash(userData.password, 10).then(newUserData => {
           return newUserData
