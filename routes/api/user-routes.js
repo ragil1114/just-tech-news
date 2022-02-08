@@ -51,6 +51,7 @@ router.post('/', (req, res) => {
         });
 });
 
+// POST Route to login
 router.post('/login', (req, res) => {
 
   // Query operation
