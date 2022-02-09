@@ -7,6 +7,8 @@ router.get('/', (req, res) => {
     Post.findAll({
       // Query configuration
       attributes: ['id', 'post_url', 'title', 'created_at'],
+      // to return order of posts from newest to oldest
+      order: [['created_at', 'DESC']], 
       include: [
         {
           model: User,
@@ -109,4 +111,5 @@ router.delete('/:id', (req, res) => {
       });
 });
 
-  module.exports = router;
+
+module.exports = router;
