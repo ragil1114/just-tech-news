@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
         }
       ]
     })
+      // Promise that captures the response from the db Call
       .then(dbPostData => res.json(dbPostData))
       .catch(err => {
         console.log(err);
