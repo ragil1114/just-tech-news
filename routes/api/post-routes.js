@@ -3,7 +3,7 @@ const { Post, User } = require('../../models');
 
 // get all posts in db
 router.get('/', (req, res) => {
-    console.log('======================');
+    // console.log('======================');
     Post.findAll({
       // Query configuration
       attributes: ['id', 'post_url', 'title', 'created_at'],
@@ -14,5 +14,9 @@ router.get('/', (req, res) => {
         }
       ]
     })
-  
+      .then(dbPostData => res.json(dbPostData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   });
