@@ -11,6 +11,7 @@ Post.belongsTo(User, {
     foreignKey: 'user_id',
 });
 
+// Allows models to query each other's information in the context of a vote.
 User.belongsToMany(Post, {
     through: Vote,
     as: 'voted_posts',
