@@ -14,14 +14,26 @@ router.get('/', (req, res) => {
     });
 });
 
-// GET /api/users/1
+// GET /api/users/:id
 router.get('/:id', (req, res) => {
   // .findOne() Method is same as the SQL Query: SELECT * FROM users WHERE id = 1;
   User.findOne({
     attributes: { exclude: ['password'] },
-      where: {
-        id: req.params.id
+    where: {
+      id: req.params.id
+    },
+    include: [
+      {
+        model: Post,
+        attributes: ['id', 'title', 'post_url', 'created_at']
+      },
+      {
+        model: Post,
+        attributes: ['title'],
+        through: Vote,
+        as: 'voted_posts'
       }
+    ]
   })
     .then(dbUserData => {
       if (!dbUserData) {
