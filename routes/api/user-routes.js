@@ -22,6 +22,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
+    // When we query a single user, we'll receive the title information of every post they've ever voted on.
     include: [
       {
         model: Post,
