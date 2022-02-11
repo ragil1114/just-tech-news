@@ -3,7 +3,7 @@ const Post = require('./Post');
 const Vote = require('./Vote');
 const Comment = require('./Comment');
 
-// create model associations
+// User & Post Model Associations
 User.hasMany(Post, {
     foreignKey: 'user_id'
 });
@@ -12,7 +12,7 @@ Post.belongsTo(User, {
     foreignKey: 'user_id',
 });
 
-// The following two associations allow models to query each other's information in the context of a vote.
+// These Associations allow models to query each other's information in the context of a vote.
 User.belongsToMany(Post, {
     through: Vote,
     as: 'voted_posts',
@@ -25,7 +25,7 @@ Post.belongsToMany(User, {
     foreignKey: 'post_id'
 });
 
-// The following four associations directly connect the Post, User & Vote models.
+// These Associations directly connect the Post, User & Vote models.
 Vote.belongsTo(User, {
     foreignKey: 'user_id'
 });
