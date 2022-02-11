@@ -4,9 +4,9 @@ const { Post, User, Vote } = require('../../models');
 
 // GET all posts in db. /api/posts
 router.get('/', (req, res) => {
-  // console.log('======================');
+  // Query
   Post.findAll({
-    // Query configuration
+    // configuration
     attributes: [
       'id',
       'post_url',
