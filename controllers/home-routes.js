@@ -30,8 +30,10 @@ router.get('/', (req, res) => {
       ]
     })
       .then(dbPostData => {
+        // This will loop over and map each Sequelize object into a serialized version of itself, saving the results in a new posts array.
+        const posts = dbPostData.map(post => post.get({ plain: true }));
         // pass a single post object into the homepage template
-        console.log(dbPostData[0]);
+        // console.log(dbPostData[0]);
         res.render('homepage', dbPostData[0].get({ plain: true }));
       })
       .catch(err => {
