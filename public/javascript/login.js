@@ -15,7 +15,13 @@ async function signupFormHandler(event) {
         }),
         headers: { 'Content-Type': 'application/json' }
       });
-      console.log(response);
+      // check the response status
+      if (response.ok) {
+        console.log('success');
+      } 
+      else {
+        alert(response.statusText);
+      }
     }
   
 }
