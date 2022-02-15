@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const session = require('express-session');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 
@@ -9,6 +10,19 @@ const PORT = process.env.PORT || 3001;
 // Lines 10-14 is code to set up Handlebars.js as your app's template engine of choice:
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
+app.use(session(sess));
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
