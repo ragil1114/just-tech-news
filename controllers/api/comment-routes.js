@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   // check the session
+  // Wrapping the Sequelize query in if (req.session) statements ensures that only logged-in users interact with the database.
   if (req.session) {
     Comment.create({
       comment_text: req.body.comment_text,
