@@ -113,6 +113,17 @@ router.post('/login', (req, res) => {
   });  
 });
 
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+  else {
+    res.status(404).end();
+  }
+});
+
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
   // aka Query Operation. If req.body has exact key/value pairs to match the model, you can just use `req.body` instead. Pass in req.body instead to only update what's passed through.
