@@ -43,6 +43,7 @@ router.get('/', withAuth, (req, res) => {
     });
 });
 
+// This route renders the edit-post.handlebars template
 router.get('/edit/:id', withAuth, (req, res) => {
   Post.findByPk(req.params.id, {
     attributes: [
