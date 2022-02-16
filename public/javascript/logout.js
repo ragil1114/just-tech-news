@@ -4,13 +4,12 @@ async function logout() {
     method: 'post',
     headers: { 'Content-Type': 'application/json' }
   });
-  
+
   if (response.ok) {
     document.location.replace('/');
-  } 
-  else {
+  } else {
     alert(response.statusText);
   }
 }
-  
+
 document.querySelector('#logout').addEventListener('click', logout);
