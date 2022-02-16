@@ -11,14 +11,12 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // check the session
-  // Wrapping the Sequelize query in if (req.session) statements ensures that only logged-in users interact with the database.
+  // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
   if (req.session) {
     Comment.create({
       comment_text: req.body.comment_text,
-      post_id: req.body.post_id,
-      // use the id from the session
-      user_id: req.session.user_id
+      user_id: req.session.user_id,
+      post_id: req.body.post_id
     })
       .then(dbCommentData => res.json(dbCommentData))
       .catch(err => {
@@ -29,22 +27,24 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  Comment.destroy({
-    where: {
+  if (req.session) {
+    Comment.destroy({
+      where: {
         id: req.params.id
-    }
-  })
-    .then(dbCommentData => {
-      if (!dbCommentData) {
-        res.status(404).json({ message: 'No comment found with this id!' });
-        return;
       }
-      res.json(dbCommentData);
     })
-    .catch(err => {
+      .then(dbCommentData => {
+        if (!dbCommentData) {
+          res.status(404).json({ message: 'No comment found with this id!' });
+          return;
+        }
+        res.json(dbCommentData);
+      })
+      .catch(err => {
         console.log(err);
         res.status(500).json(err);
-    });
+      });
+  }
 });
 
 module.exports = router;
